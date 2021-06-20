@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>script load method</title>
+    <!-- default
+        html에서 script 태그를 만나면 fetch, execute 후에 추가 html 파싱 진행
+        script 삽입을 맨마지막에 하는 방법으로 회피하기는 하지만 html 페이지가 다 로딩 된 다음에 다운로드를 시도하므로 네트워크가 느린 곳에서는 속도 차이가 큼.
+    -->
+    <script src="./01_load_method.js"></script>
+
+    <!-- async
+        fetch : background
+        execute : just after fetch and block the page loading(html parsing). DOMContentLoaded does not wait for async script loading
+        execute order : script가 다운로드 된 순서
+    -->
+    <script async src="./01_load_method.js"></script>
+
+    <!-- defer
+        fetch : background
+        execute : after page load, before DOMContentLoaded event 
+        execute order : html에 선언된 순서 그래도
+    -->
+    <script defer src="./01_load_method.js"></script>
+
+    <!-- dynamic
+        acting like async by default
+        but script.async=false can be added.
+    -->
+    <script>
+      let script = document.createElement("script");
+      script.src = "./01_load_method.js";
+      document.body.append(script); // load at this point
+    </script>
+  </head>
+  <body></body>
+</html>
